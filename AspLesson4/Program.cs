@@ -11,6 +11,10 @@ builder.Services.AddDbContext<ProductDbContext>(opt =>
 {
     opt.UseSqlServer(conn);
 });
+
+builder.Services.AddRazorPages();
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -27,7 +31,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
-
+app.MapRazorPages();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
