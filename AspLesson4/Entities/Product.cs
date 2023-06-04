@@ -1,4 +1,6 @@
-﻿namespace AspLesson4.Entities
+﻿using Microsoft.AspNetCore.Mvc;
+
+namespace AspLesson4.Entities
 {
     public class Product
     {

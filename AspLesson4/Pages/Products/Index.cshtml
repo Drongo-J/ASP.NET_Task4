@@ -1,0 +1,71 @@
+﻿@page
+@model AspLesson4.Pages.Product.IndexModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+<h1 class="m-5 text-danger">Special INFO @Model.Message</h1>
+
+<div class="alert alert-success" role="alert">
+    @Model.Info
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Products)
+        {
+            <tr>
+                <th scope="row">@item.Id</th>
+                <th scope="row">@item.Name</th>
+                <th scope="row">@item.Price<span>$</span></th>
+                <th scope="row">
+                    <button class="btn btn-outline-primary" type="button" onclick="UpdateProduct('@item.Name', @item.Price)">Edit</button>
+                </th>
+                <th scope="row">
+                    <form method="post" asp-page-handler="Delete">
+                        <input type="hidden" name="id" value="@item.Id" />
+                        <button class="btn btn-outline-danger" type="submit">Delete</button>
+                    </form>
+                </th>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<form method="post">
+    <div class="mb-3">
+        <label class="form-label">Product Name</label>
+        <input asp-for="Product.Name" name="Name" type="text" class="form-control">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Product Price</label>
+        <input asp-for="Product.Price" name="Price" type="number" class="form-control">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Add New Product</button>
+</form>
+
+<form method="post" asp-page-handler="Update" class="mt-2">
+    <button class="btn btn-warning" type="submit">Update</button>
+</form>
+
+<script>
+    function UpdateProduct(name, price) {
+        console.log(name + " " + price);
+        document.querySelector('input[name="Name"]').value = name;
+        document.querySelector('input[name="Price"]').value = price;
+    @{
+        Model.Product.Name = "test";
+    }
+    alert(@Model.Product.Name );
+    }
+</script>

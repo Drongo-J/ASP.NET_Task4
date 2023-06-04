@@ -1,4 +1,5 @@
 using AspLesson4.Models;
+using Microsoft.AspNetCore.Rewrite;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -39,5 +40,7 @@ app.MapControllerRoute(
 app.MapControllerRoute(
     name: "areas",
     pattern: "{area:exists?}/{controller=Home}/{action=Index}/{id?}");
+
+app.UseRewriter(new RewriteOptions().AddRedirect("^$", "products"));
 
 app.Run();
